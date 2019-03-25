@@ -34,15 +34,18 @@ static int *test_mem1;
 //static void *test_mem2;
 
 int __init init_module(void) {
-	printk(KERN_ERR "Hello world!");
 	test_mem1 = (int *)kmalloc(300, GFP_KERNEL);
 	test_mem1[2] = 0;
 	test_mem1 = krealloc(test_mem1, 500, GFP_KERNEL);
-	test_mem1[43] = 12;
+	test_mem1[-6] = 12;
+	test_mem1 = (int *)kmalloc(400, GFP_KERNEL);
+	test_mem1 = (int *)kmalloc(600, GFP_KERNEL);
+	printk(KERN_INFO "test module inserted");
 	return 0;
 }
 
 void __exit cleanup_module(void) {
 	kfree(test_mem1);
-	printk(KERN_ERR "Cleaning up module.");
+	mmwl_status();
+	printk(KERN_INFO "cleaning up test module");
 }

@@ -20,6 +20,9 @@ int main () {
 	printf("%s\n", str3);
 
 	free(str1);
+
+	mmwl_status();
+
 	free(str3);
 	return 0;
 }

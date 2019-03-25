@@ -23,37 +23,41 @@
 #define MMWL_CORE_H_
 
 #ifdef __KERNEL__
-#define MMWL_LOG_INFO(log, args...)		printk(KERN_INFO "mmwl:info: " log "\n", ## args)
-#define MMWL_LOG_ERROR(log, args...)	printk(KERN_ERR "mmwl:error: " log "\n", ## args)
+#include <linux/kernel.h>
+#define MMWL_LOG_INFO(log, args...)	printk(KERN_INFO "mmwl:inf: " log "\n", ## args)
+#define MMWL_LOG_ERROR(log, args...)	printk(KERN_ERR  "mmwl:err: " log "\n", ## args)
 #else
-#define MMWL_LOG_INFO(log, args...)		fprintf(stdout, "mmwl:info: " log "\n", ## args)
-#define MMWL_LOG_ERROR(log, args...)	fprintf(stderr, "mmwl:error: " log "\n", ## args)
+#include <stdlib.h>
+#define MMWL_LOG_INFO(log, args...)	fprintf(stdout, "mmwl:inf: " log "\n", ## args)
+#define MMWL_LOG_ERROR(log, args...)	fprintf(stderr, "mmwl:err: " log "\n", ## args)
 #endif
 
 
-void * mmwl_malloc (		size_t			size,
-#ifdef __KERNEL__
-							gfp_t 			flags,
-#endif
-					const	char *			filename,
-					const	char *			func_name,
-					const	unsigned int	line_num
+void * mmwl_malloc (	size_t		size,
+	#ifdef __KERNEL__
+			gfp_t		flags,
+	#endif
+		const	char *		filename,
+		const	char *		func_name,
+		const	unsigned int	line_num
 );
 
-void * mmwl_realloc (		void *			ptr,
-							size_t			size,
-#ifdef __KERNEL__
-							gfp_t 			flags,
-#endif
-					const	char *			filename,
-					const	char *			func_name,
-					const	unsigned int	line_num
+void * mmwl_realloc (	void *		ptr,
+			size_t		size,
+	#ifdef __KERNEL__
+			gfp_t		flags,
+	#endif
+		const	char *		filename,
+		const	char *		func_name,
+		const	unsigned int	line_num
 );
 
-void mmwl_free (			void *			ptr,
-					const	char *			filename,
-					const	char *			func_name,
-					const	unsigned int	line_num
+void mmwl_free (	void *		ptr,
+		const	char *		filename,
+		const	char *		func_name,
+		const	unsigned int	line_num
 );
+
+void mmwl_status (void);
 
 #endif //MMWL_CORE_H_

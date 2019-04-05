@@ -59,6 +59,11 @@ mmwl:err: addr:0x55a30b2d5450 size:60 @main:7 in test.c
 mmwl:inf: *** mmwl statistics END ***
 ```
 
+#### Signature mismatch error occurs for following reasons:
+ 1. Signature was overwritten by the user program, suggesting out of bound write.
+ 2. "free" was called with wrong address.
+ 3. The block was already freed, hence multiple "free" called on same address.
+
 ## Author
 [Abhishek Ghogare](https://github.com/abhishek-ghogare)
 
